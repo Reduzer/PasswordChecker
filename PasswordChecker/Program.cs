@@ -1,9 +1,13 @@
-﻿using System;
+﻿using PasswordChecker.Hashing;
+using System;
 
 namespace PasswordChecker
 {
     public class Program
     {
+        private static handler m_hashHandler = new handler();
+        private static List<string> hashes = new List<string>();
+
         private static string sUserInput;
 
         public static void Main()
@@ -12,7 +16,7 @@ namespace PasswordChecker
 
             getInput();
 
-
+            hashes = m_hashHandler.setUserInput(sUserInput);
 
             Console.ReadKey();
         }
