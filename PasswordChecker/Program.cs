@@ -43,5 +43,10 @@ namespace PasswordChecker
 
             sUserInput = input;
         }
+
+        private static void checkDB()
+        {
+
+        }
     }
 }
