@@ -33,8 +33,9 @@ namespace PasswordChecker.Hashing
 
                 var sb = new StringBuilder();
 
-                foreach (byte b in bytes)
+                for (int i = 0; i < 5; i++)
                 {
+                    byte b = bytes[i];
                     sb.Append(b.ToString("X2"));
                 }
 
