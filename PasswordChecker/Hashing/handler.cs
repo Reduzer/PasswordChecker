@@ -35,6 +35,7 @@ namespace PasswordChecker.Hashing
             //   vs_returnList = vs_hashes;
             //}
 
+            Console.WriteLine();
             return m_sha1.getHash(m_sInput);
         }
 

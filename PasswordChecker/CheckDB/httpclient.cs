@@ -29,7 +29,8 @@ namespace PasswordChecker.CheckDB
                 Uri uFullAdress = new Uri(sFullAdress);
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(uFullAdress);
+                Console.WriteLine("URL: " + "\n" + uFullAdress);
+                Console.WriteLine();
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 try

@@ -40,7 +40,9 @@ namespace PasswordChecker.Hashing
                 }
 
                 sReturnString = sb.ToString().ToUpper();
+
                 Console.WriteLine("Calculated SHA1 Hash: " + "\n" + sReturnString);
+                Console.WriteLine();
             }
 
             return sReturnString;

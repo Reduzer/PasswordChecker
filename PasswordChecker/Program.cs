@@ -25,6 +25,8 @@ namespace PasswordChecker
 
             checkDB();
 
+            Console.ReadKey();
+            
             end();
         }
 
