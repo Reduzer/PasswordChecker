@@ -1,4 +1,5 @@
-﻿using PasswordChecker.Hashing;
+﻿using PasswordChecker.CheckDB;
+using PasswordChecker.Hashing;
 using System;
 
 namespace PasswordChecker
@@ -7,6 +8,7 @@ namespace PasswordChecker
     {
         private static handler m_hashHandler = new handler();
         private static List<string> hashes = new List<string>();
+        private static httpclient m_httpClient = new httpclient();
 
         private static string sUserInput;
 
@@ -17,6 +19,8 @@ namespace PasswordChecker
             getInput();
 
             hashes = m_hashHandler.setUserInput(sUserInput);
+
+            checkDB();
 
             Console.ReadKey();
         }
@@ -46,7 +50,11 @@ namespace PasswordChecker
 
         private static void checkDB()
         {
-
+            foreach (var value in hashes)
+            {
+                httpclient.request(value);
+            }
+            
         }
     }
 }

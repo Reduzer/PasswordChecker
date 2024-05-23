@@ -40,9 +40,9 @@ namespace PasswordChecker.Hashing
 
         private bool getHashes()
         {
-            vs_hashes.Add(m_md5.getHash(m_sInput));
+            //vs_hashes.Add(m_md5.getHash(m_sInput));
             vs_hashes.Add(m_sha1.getHash(m_sInput));
-            vs_hashes.Add(m_sha2.getHash(m_sInput));
+            //vs_hashes.Add(m_sha2.getHash(m_sInput));
             if (SHA3_512.IsSupported)
             {
                 vs_hashes.Add(m_sha3.getHash(m_sInput));
