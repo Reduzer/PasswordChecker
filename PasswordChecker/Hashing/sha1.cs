@@ -33,14 +33,14 @@ namespace PasswordChecker.Hashing
 
                 var sb = new StringBuilder();
 
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < bytes.Length; i++)
                 {
                     byte b = bytes[i];
                     sb.Append(b.ToString("X2"));
                 }
 
-                sReturnString = sb.ToString();
-                Debug.WriteLine("Calculated SHA1 Hash: " + "\n" + sReturnString);
+                sReturnString = sb.ToString().ToUpper();
+                Console.WriteLine("Calculated SHA1 Hash: " + "\n" + sReturnString);
             }
 
             return sReturnString;

@@ -1,15 +1,18 @@
-﻿using PasswordChecker.CheckDB;
-using PasswordChecker.Hashing;
+﻿using PasswordChecker.Hashing;
+using PasswordChecker.CheckDB;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace PasswordChecker
 {
     public class Program
     {
         private static handler m_hashHandler = new handler();
-        private static List<string> hashes = new List<string>();
+        private static string hashes;
         private static httpclient m_httpClient = new httpclient();
 
+
+        public static string response;
         private static string sUserInput;
 
         public static void Main()
@@ -22,17 +25,19 @@ namespace PasswordChecker
 
             checkDB();
 
-            Console.ReadKey();
+            end();
         }
 
         private static void initialize()
         {
+            Console.Clear();
             Console.Title = "Password Checker by Reduzer";
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.WriteLine("Password Checker by Reduzer");
+            Console.WriteLine("Currently only uses SHA1, as the api only supports SHA1");
             Console.WriteLine();
-            Console.WriteLine("Please write your password: ");
+            Console.Write("Please write your password: ");
         }
 
         private static void getInput()
@@ -50,11 +55,27 @@ namespace PasswordChecker
 
         private static void checkDB()
         {
-            foreach (var value in hashes)
+            httpclient.request(hashes);
+        }
+
+        private static void end()
+        {
+
+            Console.WriteLine("Do you want to quit the program? [y/n]");
+            string input = Convert.ToString(Console.ReadLine());
+            if (input == "y")
             {
-                httpclient.request(value);
+                return;
             }
-            
+            else if(input == "n")
+            {
+                Main();
+            }
+            else
+            {
+                Console.WriteLine("Invalid input");
+                end();
+            }
         }
     }
 }

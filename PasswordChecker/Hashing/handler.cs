@@ -26,23 +26,23 @@ namespace PasswordChecker.Hashing
             m_sha3 = new sha3();
         }
 
-        public List<string> setUserInput(string userInput)
+        public string setUserInput(string userInput)
         {
             m_sInput = userInput;
-            List<string> vs_returnList = new List<string>();
+            //List<string> vs_returnList = new List<string>();
 
-            if (getHashes()) {
-                vs_returnList = vs_hashes;
-            }
+            //if (getHashes()) {
+            //   vs_returnList = vs_hashes;
+            //}
 
-            return vs_returnList;
+            return m_sha1.getHash(m_sInput);
         }
 
         private bool getHashes()
         {
-            //vs_hashes.Add(m_md5.getHash(m_sInput));
+            vs_hashes.Add(m_md5.getHash(m_sInput));
             vs_hashes.Add(m_sha1.getHash(m_sInput));
-            //vs_hashes.Add(m_sha2.getHash(m_sInput));
+            vs_hashes.Add(m_sha2.getHash(m_sInput));
             if (SHA3_512.IsSupported)
             {
                 vs_hashes.Add(m_sha3.getHash(m_sInput));

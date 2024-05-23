@@ -24,32 +24,35 @@ namespace PasswordChecker.CheckDB
         {
             try
             {
-                string sFullAdress = adress + sInput;
+                string sFullAdress = adress + sInput.Substring(0, 5);
 
                 Uri uFullAdress = new Uri(sFullAdress);
 
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(uFullAdress);
 
-                WebRequest request = WebRequest.Create(sFullAdress);
-                request.Credentials = CredentialCache.DefaultCredentials;
+                Console.ForegroundColor = ConsoleColor.Green;
+                try
+                {
+                    using (HttpResponseMessage response = await client.GetAsync(uFullAdress))
+                    {
+                        response.EnsureSuccessStatusCode();
+                        string responseBody = await response.Content.ReadAsStringAsync();
 
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                        Console.WriteLine(responseBody);
 
-                Console.WriteLine(response.StatusDescription);
+                        Program.response = responseBody;
+                    }
 
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-
-                string responseFromServer = reader.ReadToEnd();
-
-                Console.WriteLine(responseFromServer);
-
-                reader.Close();
-                dataStream.Close();
-                response.Close();
+                    Console.WriteLine();
+                }
+                catch(HttpRequestException e)
+                {
+                    Console.WriteLine($"{e.Message}");
+                }
             }
             catch(Exception e){
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Exception has been Caought!");
                 Console.WriteLine(e.ToString());
             }
